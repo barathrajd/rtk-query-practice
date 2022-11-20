@@ -7,17 +7,16 @@ import { app } from "../../firebase"
 const SignUp = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const auth = getAuth()
+  const auth = getAuth(app)
   const [loading, setLoading] = useToggle(false)
 
   const handleSubmit = (e) => {
-    // console.log(auth)
-    e.preventDefault()
-    const email = emailRef.current
-    const password = passwordRef.current
-
     setLoading(true)
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(
+      auth,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
       .then((userCredential) => {
         // Signed in
         setLoading(false)
@@ -36,7 +35,7 @@ const SignUp = () => {
   return (
     <div className="d-flex flex-column flex-md-row w-100 gap-5">
       <img src={loginImage} alt="SignUp Image" className="w-50 m-1" />
-      <form onSubmit={handleSubmit} className="row m-auto">
+      <div className="row m-auto">
         <div className="h4 col-sm-12 col-12 w-100 mb-3 p-0">
           Create new account
         </div>
@@ -65,12 +64,13 @@ const SignUp = () => {
           />
         </div>
         <button
+          onClick={handleSubmit}
           className="col-sm-12 col-12 w-100 btn btn-primary"
           disabled={loading}
         >
           {loading ? "Loading..." : "SignUp"}
         </button>
-      </form>
+      </div>
     </div>
   )
 }

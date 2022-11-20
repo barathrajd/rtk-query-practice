@@ -13,11 +13,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     // console.log(auth)
     e.preventDefault()
-    const email = emailRef.current
-    const password = passwordRef.current
 
     setLoading(true)
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(
+      auth,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
       .then((userCredential) => {
         // Signed in
         setLoading(false)
