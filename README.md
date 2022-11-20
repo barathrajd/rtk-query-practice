@@ -1,2 +1,3 @@
 # rtk-query-practice
-Redux tool kit query method practise application
+
+Redux tool kit query method practise application.
